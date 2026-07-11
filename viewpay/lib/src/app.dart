@@ -15,8 +15,6 @@ import 'views/support/support_view.dart';
 
 // GoRouter Routing Table Setup
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateProvider);
-
   return GoRouter(
     initialLocation: '/onboarding',
     routes: [

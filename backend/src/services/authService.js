@@ -30,6 +30,18 @@ class AuthService {
     // Check if user exists
     const existing = await db.query(userQueries.findUserByEmail, [email]);
     if (existing.rowCount > 0) {
+      const user = existing.rows[0];
+      if (!user.is_verified) {
+        // Regenerate and send new OTP
+        const otp = generateOtp();
+        await saveOtp(email, otp, 'verify_email');
+        await sendOtpVerificationEmail(email, otp);
+        
+        const err = new Error('Email registered but unverified. New OTP sent. Please verify.');
+        err.statusCode = 403;
+        err.unverified = true;
+        throw err;
+      }
       const err = new Error('Email already registered');
       err.statusCode = 400;
       throw err;
@@ -87,6 +99,18 @@ class AuthService {
   static async registerAdvertiser(companyName, contactName, email, password) {
     const existing = await db.query(advertiserQueries.findAdvertiserByEmail, [email]);
     if (existing.rowCount > 0) {
+      const adv = existing.rows[0];
+      if (!adv.is_verified) {
+        // Regenerate and send new OTP
+        const otp = generateOtp();
+        await saveOtp(email, otp, 'verify_email');
+        await sendOtpVerificationEmail(email, otp);
+        
+        const err = new Error('Email registered but unverified. New OTP sent. Please verify.');
+        err.statusCode = 403;
+        err.unverified = true;
+        throw err;
+      }
       const err = new Error('Email already registered as advertiser');
       err.statusCode = 400;
       throw err;

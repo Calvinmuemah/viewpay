@@ -26,6 +26,7 @@ const errorHandler = (err, req, res, next) => {
     success: false,
     status: statusCode,
     message,
+    unverified: err.unverified || undefined,
     errors: err.errors || null,
     stack: process.env.NODE_ENV === 'production' ? undefined : err.stack
   });
