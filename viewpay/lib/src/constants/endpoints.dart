@@ -1,7 +1,7 @@
 class Endpoints {
   // Use 10.0.2.2 for Android Emulator, localhost for iOS simulator/web, 
   // or a custom hosting domain (e.g. production domain).
-  static const String baseUrl = 'http://10.0.2.2:5000/api/v1';
+  static const String baseUrl = 'https://viewpay-nine.vercel.app/api/v1';
 
   // Authentication endpoints
   static const String registerUser = '/auth/register/user';

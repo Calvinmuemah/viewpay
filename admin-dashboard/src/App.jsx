@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = 'https://viewpay-nine.vercel.app/api/v1';
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('admin_token') || null);
